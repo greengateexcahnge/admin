@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/*
+ * ---------------------------------------------------------------------------
+ * Design tokens
+ * Paper / cream surfaces + charcoal ink. Light, warm, editorial vibe.
+ * Edit the CSS variables below to retheme the entire project.
+ * ---------------------------------------------------------------------------
+ */
+:root {
+  /* Surfaces — warm paper / cream */
+  --paper: 42 38% 96%; /* #F7F5EF base background */
+  --paper-raised: 40 33% 98%; /* slightly lifted cards */
+  --paper-sunken: 40 22% 92%; /* wells, muted blocks */
+  --coffee: 34 38% 90%; /* #EFE6D9 light coffee / latte */
+
+  /* Ink — charcoal */
+  --ink: 0 0% 13%; /* #212121 primary text / brand */
+  --ink-muted: 30 4% 38%; /* secondary text */
+  --ink-subtle: 30 4% 55%; /* hints, placeholders */
+
+  /* Lines */
+  --line: 38 16% 86%; /* hairline borders */
+  --line-strong: 36 12% 78%;
+
+  /* Brand / interactive — charcoal primary */
+  --primary: 0 0% 13%;
+  --primary-foreground: 42 38% 97%;
+
+  /* Feedback */
+  --success: 152 36% 38%;
+  --warning: 34 78% 48%;
+  --danger: 4 64% 48%;
+  --info: 210 42% 44%;
+
+  /* Focus ring */
+  --ring: 0 0% 13%;
+
+  /* Radii */
+  --radius: 0.625rem;
+}
+
+/* Optional dark theme — inverts paper/ink so the same tokens keep working. */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"],
+  :root[data-theme="dark"] {
+    --paper: 30 6% 11%;
+    --paper-raised: 30 5% 14%;
+    --paper-sunken: 30 6% 9%;
+
+    --ink: 42 30% 94%;
+    --ink-muted: 36 8% 70%;
+    --ink-subtle: 36 6% 52%;
+
+    --line: 30 5% 22%;
+    --line-strong: 30 5% 30%;
+
+    --primary: 42 30% 94%;
+    --primary-foreground: 0 0% 13%;
+
+    --ring: 42 30% 94%;
+  }
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * Tailwind theme mapping (Tailwind v4 CSS-first config)
+ * Exposes the tokens above as utilities: bg-paper, text-ink, border-line, etc.
+ * ---------------------------------------------------------------------------
+ */
+@theme inline {
+  --color-paper: hsl(var(--paper));
+  --color-paper-raised: hsl(var(--paper-raised));
+  --color-paper-sunken: hsl(var(--paper-sunken));
+  --color-coffee: hsl(var(--coffee));
+
+  --color-ink: hsl(var(--ink));
+  --color-ink-muted: hsl(var(--ink-muted));
+  --color-ink-subtle: hsl(var(--ink-subtle));
+
+  --color-line: hsl(var(--line));
+  --color-line-strong: hsl(var(--line-strong));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-success: hsl(var(--success));
+  --color-warning: hsl(var(--warning));
+  --color-danger: hsl(var(--danger));
+  --color-info: hsl(var(--info));
+
+  --color-ring: hsl(var(--ring));
+
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * Base layer
+ * ---------------------------------------------------------------------------
+ */
+@layer base {
+  * {
+    border-color: hsl(var(--line));
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: hsl(var(--paper));
+    color: hsl(var(--ink));
+    font-feature-settings: "cv11", "ss01";
+    font-variation-settings: "opsz" 32;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: hsl(var(--ink) / 0.12);
+  }
+}
